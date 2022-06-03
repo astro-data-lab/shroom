@@ -151,10 +151,13 @@ def plot_data(train, test, **kwargs):
     corner.corner(test, fig=fig, color='C1', hist_kwargs={"density": True}, **kwargs);
     return fig
 
-def analyze(som, train, test, plot=True, labels=None):
-    freq, freq_test, diff, above, below = get_maps(som, train, test)
-    groups_above, labeled_above = connect_cells(above, structure=np.ones((3,3)))
-    groups_below, labeled_below = connect_cells(below)
+def analyze(som, train, test, sig=3, min_cells=5, plot=True, labels=None):
+    # make frequency maps and their differences
+    freq, freq_test, diff, above, below = get_maps(som, train, test, sig=sig)
+    # find connected groups: overdensities often ridges, so use broader
+    # structure kernel (connected to all 8 neighbor cells)
+    groups_above, labeled_above = connect_cells(above, minimum=min_cells, structure=np.ones((3,3)))
+    groups_below, labeled_below = connect_cells(below, minimum=min_cells)
     print (f"Detected {len(groups_above)} groups above threshold")
     print (f"Detected {len(groups_below)} groups below threshold")
 
