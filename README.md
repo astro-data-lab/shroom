@@ -4,9 +4,12 @@ Several tests exist to quantify how well two data distributions match.
 But if they don't match well, it's difficult to find prototypical examples of discrepancies, especially in high dimensions.
 Our method performs a dimensionality reduction by a Self-Organzing Map, finds regions of significant differences in the maps for both data sets, and selects or aggregates samples from those regions as examples of over/under-represented features between the data sets.
 
+![download-1](https://user-images.githubusercontent.com/1463403/175424123-6f06e22c-38d7-4535-b941-aa86ac5cc318.png)
+
 The setup is simple:
 
 ```python
+
 
 from shroom import Shroom
 
